@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="_fonts\DancingScript.ttf" />
+    <None Remove="_fonts\Lobster.ttf" />
+    <None Remove="_fonts\Montserrat.ttf" />
+    <None Remove="_fonts\Muli.ttf" />
+    <None Remove="_fonts\PTSerif.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="_fonts\DancingScript.ttf" />
+    <EmbeddedResource Include="_fonts\Lobster.ttf" />
+    <EmbeddedResource Include="_fonts\Montserrat.ttf" />
+    <EmbeddedResource Include="_fonts\Muli.ttf" />
+    <EmbeddedResource Include="_fonts\PTSerif.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0006" />
+  </ItemGroup>
+
+</Project>
