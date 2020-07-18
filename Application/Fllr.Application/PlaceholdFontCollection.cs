@@ -22,10 +22,7 @@ namespace Fllr.Application
 
             var fontFiles = new[]
             {
-                $"{AssemblyNameString}._fonts.DancingScript.ttf",
-                $"{AssemblyNameString}._fonts.Lobster.ttf",
                 $"{AssemblyNameString}._fonts.Montserrat.ttf",
-                $"{AssemblyNameString}._fonts.Muli.ttf",
                 $"{AssemblyNameString}._fonts.PTSerif.ttf"
             };
 

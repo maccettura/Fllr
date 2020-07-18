@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Fllr.Application\Fllr.Application.csproj" />
     <ProjectReference Include="..\Fllr.Image.Application\Fllr.Image.Generator.csproj" />
-    <ProjectReference Include="..\Fllr.Polygon.Generator\Fllr.Polygon.Generator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
