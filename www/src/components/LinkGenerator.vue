@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-2">
+        <div class="col-md-5 offset-md-1">
             <div class="form">
                 <h4>Required:</h4>
                 <div class="row mb-3">            
@@ -51,14 +51,14 @@
                     <p><small>Please note: you can provide both colors, or provide neither (and let the defaults apply). <strong>You cannot provide just one color</strong>.</small></p>
                 </div>
                 <div class="row mb-3">            
-                    <div class="col-md-3">
+                    <div class="col-4">
                         <label for="font" class="form-label">Font</label>
                         <select id="font" v-model="font" class="form-select" aria-label="Font Selection">                
                             <option value="montserrat">Montserrat</option>
                             <option value="pt serif">PT Serif</option>
                         </select>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-8">
                         <label for="text" class="form-label">Text</label>
                         <input v-model="text" id="text" type="text" class="form-control" placeholder="Lorem ipsum dolor..." aria-label="Text" maxlength="100">
                     </div>
@@ -67,17 +67,19 @@
                     <div class="col-12">
                         <div class="input-group mb-3">
                             <input v-model="imageUrl" type="text" disabled class="form-control" placeholder="" aria-label="Generated Image Url" aria-describedby="copy-to-clipboard">
-                            <button v-on:click="copyToClipboard" class="btn btn-outline-secondary" type="button" id="copy-to-clipboar">Copy to Clipboard</button>
+                            <button @click="copyToClipboard(imageUrl)" class="btn btn-outline-secondary" type="button" id="copy-to-clipboar">Copy</button>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input v-model="imageTag" type="text" disabled class="form-control" placeholder="" aria-label="Generated Image Url" aria-describedby="copy-to-clipboard">
+                            <button @click="copyToClipboard(imageTag)" class="btn btn-outline-secondary" type="button" id="copy-to-clipboar">Copy</button>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>  
-    <div class="row">
-        <div class="col">
-            <img v-bind:src="imageUrl" class="img-fluid mx-auto d-block" alt="Placeholder Image">
+        <div class="col-md-5">
+            <img v-if="!$v.$anyError" v-bind:src="imageUrl" class="img-fluid" alt="Placeholder Image">
         </div>
     </div>  
 </div>  
@@ -121,27 +123,10 @@ export default {
     },
     computed: {
         imageUrl: function () {
-
-            if(this.$v.$anyError) { 
-                var num = Math.floor(Math.random() * 5);
-
-                if(num == 1){
-                    return '(╯°□°)╯︵ ┻━┻';
-                }
-                else if(num == 2) {
-                    return '(ಠ_ಠ)';
-                }
-                else if(num == 3) {
-                    return 'ヽ( ಠ益ಠ )ﾉ';
-                }
-                else if(num == 4) {
-                    return 'ಠಿ_ಠ';
-                }
-                else {
-                    return '( ͡o ͜ʖ ͡o)';
-                }
+            var emoji = this.getEmojiIfError();
+            if(emoji){
+                return emoji;
             }
-
             const baseUrl = `https://i.fllr.art/${this.width}x${this.height}`;
 
             var url;
@@ -177,6 +162,13 @@ export default {
 
             return url;         
         },
+        imageTag: function() {
+            var emoji = this.getEmojiIfError();
+            if(emoji){
+                return emoji;
+            }
+            return `<img src="${this.imageUrl}" alt="${this.width}x${this.height} FPO image" />`;
+        },
         textColorStyle: function(){
             if(this.textColor) {
                 return 'background-color: #' + this.textColor;
@@ -191,9 +183,9 @@ export default {
         }
     },
     methods : {
-        copyToClipboard : function(){
+        copyToClipboard : function(text){
             var self = this;
-            navigator.clipboard.writeText(this.imageUrl).then(function() {
+            navigator.clipboard.writeText(text).then(function() {
                 console.log('made it this far');
                 self.$toasted.show("Copied!", { 
                     theme: "outline", 
@@ -204,6 +196,27 @@ export default {
             function(err) {   
                 console.log(err);         
             });
+        },
+        getEmojiIfError: function() {
+            if(this.$v.$anyError) { 
+                var num = Math.floor(Math.random() * 5);
+
+                if(num == 1){
+                    return '(╯°□°)╯︵ ┻━┻';
+                }
+                else if(num == 2) {
+                    return '(ಠ_ಠ)';
+                }
+                else if(num == 3) {
+                    return 'ヽ( ಠ益ಠ )ﾉ';
+                }
+                else if(num == 4) {
+                    return 'ಠಿ_ಠ';
+                }
+                else {
+                    return '( ͡o ͜ʖ ͡o)';
+                }
+            }
         }
     }
 }

@@ -3,6 +3,9 @@
     <NavBar />
     <Masthead heading="Fllr.art" subheading="An image generation API for all your FPO image needs" />
     <section id="documentation">
+      <div>
+
+      </div>
     </section>
     <section id="try-it">
       <LinkGenerator />
@@ -29,15 +32,17 @@ export default {
 h1,
 h2,
 h3 {
-    font-family: 'Montserrat'
+    font-family: 'Montserrat';
+    color: #262321;
 }
 
-.masthead {
-    height: 100vh;
-    min-height: 500px;
-    background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+h4,
+h5,
+h6 {
+  color: #397AA3;
+}
+
+body {
+  background-color: #FCFCFC;
 }
 </style>

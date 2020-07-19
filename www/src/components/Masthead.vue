@@ -20,3 +20,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+    .masthead {
+        height: 20vh;
+        min-height: 300px;
+    }
+</style>
