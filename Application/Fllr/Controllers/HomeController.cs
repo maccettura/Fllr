@@ -44,6 +44,12 @@ namespace Fllr.Controllers
             return BuildResponse(image);
         }
 
+        [Route("Error")]
+        public IActionResult Error()
+        {
+            return File(System.IO.File.ReadAllBytes("wwwroot/broken.png"), "image/png");
+        }
+
         private ImageRequest BuildBaseRequest(
             string size,
             string extension,

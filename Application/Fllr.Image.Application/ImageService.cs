@@ -9,12 +9,10 @@ namespace Fllr.Image.Generator
     {
         public PlaceholdImage GenerateImage(ImageRequest request)
         {
-            using (var image = request.ToImage())
-            {
-                image.Mutate(i => i.DrawText(request, request));
+            using var image = request.ToImage();            
+            image.Mutate(i => i.DrawText(request, request));
 
-                return SaveImage(image, request);
-            }
+            return SaveImage(image, request);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Fllr
             }
             else
             {
-                app.UseExceptionHandler("/broken.png");
+                app.UseExceptionHandler("/error");
                 app.UseHsts();
             }
 

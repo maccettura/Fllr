@@ -28,10 +28,8 @@ namespace Fllr.Application
 
             foreach (var filename in fontFiles)
             {
-                using (var stream = assembly.GetManifestResourceStream(filename))
-                {
-                    collection.Install(stream);
-                }
+                using var stream = assembly.GetManifestResourceStream(filename);
+                collection.Install(stream);
             }
 
             return collection;

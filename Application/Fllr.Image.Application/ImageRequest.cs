@@ -10,7 +10,7 @@ namespace Fllr.Image.Generator
 
         private const string DefaultExtension = "jpg";
 
-        private const string DefaultFont = "Muli";
+        private const string DefaultFont = "Montserrat";
 
         public ImageRequest(int width, int height, string extension, string text, string font, string textColor, string bgColor)
         {

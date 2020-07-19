@@ -18,36 +18,35 @@ namespace Fllr.Application
                 throw new ArgumentNullException(nameof(request));
             }
 
-            using (var outputStream = new MemoryStream())
+            using var outputStream = new MemoryStream();
+
+            string mimeType;
+            switch (request.Extension.ToLower())
             {
-                string mimeType;
-                switch (request.Extension.ToLower())
-                {
-                    case "gif":
-                        image.SaveAsGif(outputStream);
-                        mimeType = GifFormat.Instance.DefaultMimeType;
-                        break;
+                case "gif":
+                    image.SaveAsGif(outputStream);
+                    mimeType = GifFormat.Instance.DefaultMimeType;
+                    break;
 
-                    case "png":
-                        image.SaveAsPng(outputStream);
-                        mimeType = PngFormat.Instance.DefaultMimeType;
-                        break;
+                case "png":
+                    image.SaveAsPng(outputStream);
+                    mimeType = PngFormat.Instance.DefaultMimeType;
+                    break;
 
-                    case "jpg":
-                    case "jpeg":
-                    default:
-                        image.SaveAsJpeg(outputStream, new JpegEncoder { Quality = 100 });
-                        mimeType = JpegFormat.Instance.DefaultMimeType;
-                        break;
-                }
+                case "jpg":
+                case "jpeg":
+                default:
+                    image.SaveAsJpeg(outputStream, new JpegEncoder { Quality = 100 });
+                    mimeType = JpegFormat.Instance.DefaultMimeType;
+                    break;
+            }            
 
-                outputStream.Position = 0;
-                return new PlaceholdImage
-                {
-                    Payload = outputStream.ToArray(),
-                    MimeType = mimeType
-                };
-            }
+            outputStream.Position = 0;
+            return new PlaceholdImage
+            {
+                Payload = outputStream.ToArray(),
+                MimeType = mimeType
+            };
         }
     }
 }
