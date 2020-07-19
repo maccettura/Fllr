@@ -14,40 +14,31 @@ namespace Fllr.Controllers
             _imageService = imageService;
         }
 
-        [HttpGet("/{size}.{extension?}")]
-        public IActionResult Index(string size, string extension)
+        [Route("{*url}", Order = 999)]
+        public IActionResult Index()
         {
-            var request = BuildAndValidateRequest(size, extension);
+            Response.StatusCode = 400;
+            return File(System.IO.File.ReadAllBytes("wwwroot/broken.jpg"), "image/jpg");
+        }
+
+        [HttpGet("/{size}.jpg")]
+        public IActionResult Index(string size)
+        {
+            var request = BuildAndValidateRequest(size, "jpg");
 
             var image = _imageService.GenerateImage(request);
 
             return BuildResponse(image);
         }
 
-        [HttpGet("/{size}/{bgColor}.{extension?}")]
-        public IActionResult Index(string size, string bgColor, string extension)
+        [HttpGet("/{size}/{bgColor}/{textColor}.jpg")]
+        public IActionResult Index(string size, string bgColor, string textColor)
         {
-            var request = BuildAndValidateRequest(size, extension, bgColor);
+            var request = BuildAndValidateRequest(size, "jpg", bgColor, textColor);
 
             var image = _imageService.GenerateImage(request);
 
             return BuildResponse(image);
-        }
-
-        [HttpGet("/{size}/{bgColor}/{textColor}.{extension?}")]
-        public IActionResult Index(string size, string bgColor, string textColor, string extension)
-        {
-            var request = BuildAndValidateRequest(size, extension, bgColor, textColor);
-
-            var image = _imageService.GenerateImage(request);
-
-            return BuildResponse(image);
-        }
-
-        [Route("Error")]
-        public IActionResult Error()
-        {
-            return File(System.IO.File.ReadAllBytes("wwwroot/broken.png"), "image/png");
         }
 
         private ImageRequest BuildBaseRequest(
@@ -59,9 +50,9 @@ namespace Fllr.Controllers
             string text = HttpContext.Request.Query["t"];
             string font = HttpContext.Request.Query["f"];
 
-            var sizes = size.ExtractSizes();
+            var (width, height) = size.ExtractSizes();
 
-            return new ImageRequest(sizes.width, sizes.height, extension, text, font, textColor, bgColor);
+            return new ImageRequest(width, height, extension, text, font, textColor, bgColor);
         }
 
         private ImageRequest BuildAndValidateRequest(
