@@ -7,10 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["Fllr/Fllr.csproj", "Fllr/"]
-COPY ["Fllr.Image.Application/Fllr.Image.Generator.csproj", "Fllr.Image.Application/"]
-COPY ["Fllr.Application/Fllr.Application.csproj", "Fllr.Application/"]
-COPY ["Fllr.Polygon.Generator/Fllr.Polygon.Generator.csproj", "Fllr.Polygon.Generator/"]
+COPY Fllr/Fllr.csproj Fllr/
+COPY Fllr.Application/Fllr.Application.csproj Fllr.Application/
+COPY Fllr.Image.Application/Fllr.Image.Generator.csproj Fllr.Image.Application/
 RUN dotnet restore "Fllr/Fllr.csproj"
 COPY . .
 WORKDIR "/src/Fllr"

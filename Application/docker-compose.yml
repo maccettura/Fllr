@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  fllr:
+    image: ${DOCKER_REGISTRY-}fllr
+    build:
+      context: .
+      dockerfile: Fllr/Dockerfile

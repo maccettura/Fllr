@@ -4,19 +4,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
-    <None Remove="_fonts\DancingScript.ttf" />
-    <None Remove="_fonts\Lobster.ttf" />
     <None Remove="_fonts\Montserrat.ttf" />
-    <None Remove="_fonts\Muli.ttf" />
     <None Remove="_fonts\PTSerif.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="_fonts\DancingScript.ttf" />
-    <EmbeddedResource Include="_fonts\Lobster.ttf" />
     <EmbeddedResource Include="_fonts\Montserrat.ttf" />
-    <EmbeddedResource Include="_fonts\Muli.ttf" />
     <EmbeddedResource Include="_fonts\PTSerif.ttf" />
   </ItemGroup>
 
