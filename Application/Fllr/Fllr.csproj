@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Fllr.Generator.Default\Fllr.Generator.Default.csproj" />
-    <ProjectReference Include="..\..\Fllr.Infrastructure\Fllr.Infrastructure.csproj" />
+    <ProjectReference Include="..\Fllr.Generator.Default\Fllr.Generator.Default.csproj" />
+    <ProjectReference Include="..\Fllr.Infrastructure\Fllr.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
