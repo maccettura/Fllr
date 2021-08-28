@@ -11,6 +11,8 @@ namespace Fllr.Generator.Default
 {
     public class DefaultImageService : BaseImageService, IImageService<DefaultImageRequest>
     {
+        readonly float _padding = 10f;
+
         public PlaceholdImage GenerateImage(DefaultImageRequest request)
         {
             using var image = request.ToImage();
@@ -18,6 +20,8 @@ namespace Fllr.Generator.Default
             {
                 return SaveImage(image, request);
             }
+
+            float textMaxWidth = request.Width - _padding * 2; // width of image indent left & right by padding
 
             Color fontColor = request.TextColor.HexStringToColor();
 
@@ -28,15 +32,38 @@ namespace Fllr.Generator.Default
                 family = PlaceholdFontCollection.Instance.Families.FirstOrDefault();
             }
 
+            DrawingOptions drawingOptions = new()
+            {
+                TextOptions = new()
+                {
+                    WrapTextWidth = textMaxWidth,
+                }
+            };
+
             var font = new Font(family, request.FontSize);
 
             var size = TextMeasurer.Measure(request.Text, new RendererOptions(font, 72));
-            int xPos = (int)((request.Width - size.Width) / 2);
-            int yPos = (int)((request.Height - size.Height) / 2);
 
-            image.Mutate(i => i.DrawText(request.Text, font, fontColor, new PointF(xPos, yPos)));
+            float xPos = CalculatePos(request.Width, size.Width);
+            float yPos = CalculatePos(request.Height, size.Height);
+
+            image.Mutate(i => i.DrawText(drawingOptions, request.Text, font, fontColor, new PointF(xPos, yPos)));
 
             return SaveImage(image, request);
+        }
+
+        private float CalculatePos(int imgSize, float txtSize)
+        {
+            float area = imgSize - _padding * 2;
+
+            float pos = (area - txtSize) / 2;
+
+            if(pos < 0)
+            {
+                pos = _padding;
+            }
+
+            return pos;
         }
     }
 }
