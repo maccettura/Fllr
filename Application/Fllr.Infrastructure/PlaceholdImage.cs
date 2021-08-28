@@ -1,6 +1,6 @@
-﻿namespace Fllr.Application
+﻿namespace Fllr.Infrastructure
 {
-    public class PlaceholdImage
+    public struct PlaceholdImage
     {
         public byte[] Payload { get; set; }
 

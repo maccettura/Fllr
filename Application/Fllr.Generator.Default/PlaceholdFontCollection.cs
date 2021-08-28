@@ -2,15 +2,15 @@
 using System.Reflection;
 using SixLabors.Fonts;
 
-namespace Fllr.Application
+namespace Fllr.Generator.Default
 {
     public sealed class PlaceholdFontCollection
     {
-        private const string AssemblyNameString = "Fllr.Application";
+        private const string AssemblyNameString = "Fllr.Generator.Default";
 
-        private static readonly AssemblyName AssemblyName = new AssemblyName(AssemblyNameString);
+        private static readonly AssemblyName AssemblyName = new(AssemblyNameString);
 
-        private static readonly Lazy<FontCollection> Lazy = new Lazy<FontCollection>(LoadFontCollection);
+        private static readonly Lazy<FontCollection> Lazy = new(LoadFontCollection);
 
         public static FontCollection Instance => Lazy.Value;
 

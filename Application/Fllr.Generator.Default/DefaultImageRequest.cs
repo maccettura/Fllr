@@ -1,8 +1,6 @@
-﻿using Fllr.Application.Interfaces;
-
-namespace Fllr.Image.Generator
+﻿namespace Fllr.Infrastructure
 {
-    public class ImageRequest : IWithExtension, IWithImageSize, IWithText
+    public struct DefaultImageRequest : IImageRequest
     {
         private const string DefaultTextColor = "A9A9A9";
 
@@ -12,14 +10,14 @@ namespace Fllr.Image.Generator
 
         private const string DefaultFont = "Montserrat";
 
-        public ImageRequest(int width, int height, string extension, string text, string font, string textColor, string bgColor)
+        public DefaultImageRequest(int width, int height, string extension, string text, string font, string textColor, string bgColor)
         {
             Width = width;
             Height = height;
             Extension = extension ?? DefaultExtension;
             Font = font ?? DefaultFont;
             TextColor = textColor ?? DefaultTextColor;
-            BackgroundColor = bgColor ?? DefaultBgColor;
+            Color = bgColor ?? DefaultBgColor;
             FontSize = Height / 10;
 
             if (string.IsNullOrWhiteSpace(text))
@@ -34,7 +32,7 @@ namespace Fllr.Image.Generator
 
         public int Height { get; }
 
-        public string BackgroundColor { get; }
+        public string Color { get; }
 
         public string Extension { get; }
 

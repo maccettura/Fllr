@@ -1,19 +1,19 @@
 ﻿using System;
 using System.IO;
-using Fllr.Application.Interfaces;
+using Fllr.Infrastructure;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace Fllr.Application
+namespace Fllr.Generator.Default
 {
     public abstract class BaseImageService
     {
-        protected PlaceholdImage SaveImage(Image<Rgba32> image, IWithExtension request)
+        protected PlaceholdImage SaveImage(Image<Rgba32> image, DefaultImageRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request?.Extension))
+            if (string.IsNullOrWhiteSpace(request.Extension))
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -39,7 +39,7 @@ namespace Fllr.Application
                     image.SaveAsJpeg(outputStream, new JpegEncoder { Quality = 100 });
                     mimeType = JpegFormat.Instance.DefaultMimeType;
                     break;
-            }            
+            }
 
             outputStream.Position = 0;
             return new PlaceholdImage

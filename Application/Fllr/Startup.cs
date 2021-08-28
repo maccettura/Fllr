@@ -1,4 +1,5 @@
-using Fllr.Image.Generator;
+using Fllr.Generator.Default;
+using Fllr.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,7 @@ namespace Fllr
         {
             services.AddControllers();
 
-            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IImageService<DefaultImageRequest>, DefaultImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>a2a6aa7f-8088-4c8e-a288-1dd767c1c11e</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fllr.Application\Fllr.Application.csproj" />
-    <ProjectReference Include="..\Fllr.Image.Application\Fllr.Image.Generator.csproj" />
+    <ProjectReference Include="..\..\Fllr.Generator.Default\Fllr.Generator.Default.csproj" />
+    <ProjectReference Include="..\..\Fllr.Infrastructure\Fllr.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
-using SixLabors.ImageSharp.PixelFormats;
 
-namespace Fllr.Application.Extensions
+namespace Fllr.Infrastructure.Extensions
 {
     public static class StringExtensions
     {
@@ -32,28 +31,18 @@ namespace Fllr.Application.Extensions
             return (w, h);
         }
 
-        public static Rgba32 HexToRgba32(this string input)
-        {
-            if (!input.IsHexColor())
-            {
-                throw new ArgumentException(nameof(input));
-            }
-
-            return ColorBuilder<Rgba32>.FromHex(input);
-        }
-
         public static bool IsHexColor(this string input)
         {
-            if (input == null || (input.Length != 3 && input.Length != 6))
+            if (input == null || input.Length != 3 && input.Length != 6)
             {
                 return false;
             }
             for (var index = 0; index < input.ToCharArray().Length; index++)
             {
                 char c = input[index];
-                bool isHex = ((c >= '0' && c <= '9') ||
-                              (c >= 'a' && c <= 'f') ||
-                              (c >= 'A' && c <= 'F'));
+                bool isHex = c >= '0' && c <= '9' ||
+                              c >= 'a' && c <= 'f' ||
+                              c >= 'A' && c <= 'F';
 
                 if (!isHex)
                 {

@@ -1,18 +1,18 @@
-﻿using Fllr.Application.Extensions;
+﻿using Fllr.Infrastructure;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace Fllr.Image.Generator.Extensions
+namespace Fllr.Generator.Default.Extensions
 {
     public static class ImageRequestExtensions
     {
-        public static Image<Rgba32> ToImage(this ImageRequest request)
+        public static Image<Rgba32> ToImage(this DefaultImageRequest request)
         {
             return new Image<Rgba32>(
                 Configuration.Default,
                 request.Width,
                 request.Height,
-                request.BackgroundColor.HexToRgba32());
+                request.Color.HexStringToColor());
         }
     }
 }

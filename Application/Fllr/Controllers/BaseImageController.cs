@@ -1,5 +1,4 @@
-﻿using Fllr.Application;
-using Fllr.Image.Generator;
+﻿using Fllr.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fllr.Controllers

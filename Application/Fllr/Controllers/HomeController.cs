@@ -1,15 +1,15 @@
-﻿using System;
-using Fllr.Application.Extensions;
-using Fllr.Image.Generator;
+﻿using Fllr.Infrastructure;
+using Fllr.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Fllr.Controllers
 {
     public class HomeController : BaseImageController
     {
-        private readonly IImageService _imageService;
+        private readonly IImageService<DefaultImageRequest> _imageService;
 
-        public HomeController(IImageService imageService)
+        public HomeController(IImageService<DefaultImageRequest> imageService)
         {
             _imageService = imageService;
         }
@@ -47,7 +47,7 @@ namespace Fllr.Controllers
             return File(System.IO.File.ReadAllBytes("wwwroot/broken.png"), "image/png");
         }
 
-        private ImageRequest BuildBaseRequest(
+        private DefaultImageRequest BuildBaseRequest(
             string size,
             string extension,
             string bgColor = null,
@@ -58,10 +58,10 @@ namespace Fllr.Controllers
 
             var (width, height) = size.ExtractSizes();
 
-            return new ImageRequest(width, height, extension, text, font, textColor, bgColor);
+            return new DefaultImageRequest(width, height, extension, text, font, textColor, bgColor);
         }
 
-        private ImageRequest BuildAndValidateRequest(
+        private DefaultImageRequest BuildAndValidateRequest(
             string size,
             string extension,
             string bgColor = null,
@@ -84,9 +84,9 @@ namespace Fllr.Controllers
                 throw new ArgumentOutOfRangeException(nameof(request.TextColor));
             }
 
-            if (!request.BackgroundColor.IsHexColor())
+            if (!request.Color.IsHexColor())
             {
-                throw new ArgumentOutOfRangeException(nameof(request.BackgroundColor));
+                throw new ArgumentOutOfRangeException(nameof(request.Color));
             }
 
             if (request.Text?.Length > 100)
