@@ -19,9 +19,6 @@ namespace Fllr.Generator.Default
                 return SaveImage(image, request);
             }
 
-            float padding = 10f;
-            float textMaxWidth = request.Width - padding * 2; // width of image indent left & right by padding
-
             Color fontColor = request.TextColor.HexStringToColor();
 
             var family = PlaceholdFontCollection.Instance.Families.FirstOrDefault(x => string.Equals(x.Name, request.Font, StringComparison.CurrentCultureIgnoreCase));
