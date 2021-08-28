@@ -1,15 +1,15 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY Fllr/Fllr.csproj Fllr/
-COPY Fllr.Application/Fllr.Application.csproj Fllr.Application/
-COPY Fllr.Image.Application/Fllr.Image.Generator.csproj Fllr.Image.Application/
+COPY ["Fllr/Fllr.csproj", "Fllr/"]
+COPY ["Fllr.Infrastructure/Fllr.Infrastructure.csproj", "Fllr.Infrastructure/"]
+COPY ["Fllr.Generator.Default/Fllr.Generator.Default.csproj", "Fllr.Generator.Default/"]
 RUN dotnet restore "Fllr/Fllr.csproj"
 COPY . .
 WORKDIR "/src/Fllr"

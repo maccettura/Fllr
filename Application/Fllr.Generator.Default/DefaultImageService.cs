@@ -31,20 +31,13 @@ namespace Fllr.Generator.Default
                 family = PlaceholdFontCollection.Instance.Families.FirstOrDefault();
             }
 
-            var drawingOptions = new DrawingOptions()
-            {
-                TextOptions = new TextOptions()
-                {
-                    WrapTextWidth = textMaxWidth,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    ApplyKerning = true
-                }
-            };
-
             var font = new Font(family, request.FontSize);
 
-            image.Mutate(i => i.DrawText(drawingOptions, request.Text, font, fontColor, new PointF(0, request.Height / 2)));
+            var size = TextMeasurer.Measure(request.Text, new RendererOptions(font, 72));
+            int xPos = (int)((request.Width - size.Width) / 2);
+            int yPos = (int)((request.Height - size.Height) / 2);
+
+            image.Mutate(i => i.DrawText(request.Text, font, fontColor, new PointF(xPos, yPos)));
 
             return SaveImage(image, request);
         }

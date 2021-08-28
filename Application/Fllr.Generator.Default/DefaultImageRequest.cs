@@ -18,7 +18,7 @@
             Font = font ?? DefaultFont;
             TextColor = textColor ?? DefaultTextColor;
             Color = bgColor ?? DefaultBgColor;
-            FontSize = Height / 10;
+            FontSize = Height / 8;
 
             if (string.IsNullOrWhiteSpace(text))
             {

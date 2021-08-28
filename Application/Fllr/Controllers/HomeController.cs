@@ -21,6 +21,7 @@ namespace Fllr.Controllers
             return File(System.IO.File.ReadAllBytes("wwwroot/broken.jpg"), "image/jpg");
         }
 
+        [HttpGet("/{size}")]
         [HttpGet("/{size}.jpg")]
         public IActionResult Index(string size)
         {
