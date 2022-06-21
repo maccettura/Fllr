@@ -32,7 +32,7 @@ namespace Fllr.Controllers
             return BuildResponse(image);
         }
 
-        [HttpGet("/{size}/{bgColor}/{textColor}.jpg")]
+        [HttpGet("/{bgColor}/{textColor}/{size}.jpg")]
         public IActionResult Index(string size, string bgColor, string textColor)
         {
             var request = BuildAndValidateRequest(size, "jpg", bgColor, textColor);

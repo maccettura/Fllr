@@ -17,9 +17,9 @@ There are a number of optional parameters as well:
 
 #### Colors
 
-You can provide overrides for the default text and background colors: `/400x400/91F5AD/000000.jpg`
+You can provide overrides for the default text and background colors: `/91F5AD/000000/400x400.jpg`
 
-<img src="https://i.fllr.art/400x400/91F5AD/000000.jpg" />
+<img src="https://i.fllr.art/91F5AD/000000/400x400.jpg" />
 
 #### Text & Font
 

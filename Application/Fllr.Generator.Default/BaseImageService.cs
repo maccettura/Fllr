@@ -21,7 +21,8 @@ namespace Fllr.Generator.Default
             using var outputStream = new MemoryStream();
 
             string mimeType;
-            switch (request.Extension.ToLower())
+            string ext = request.Extension.ToLower();
+            switch (ext)
             {
                 case "gif":
                     image.SaveAsGif(outputStream);
@@ -45,7 +46,8 @@ namespace Fllr.Generator.Default
             return new PlaceholdImage
             {
                 Payload = outputStream.ToArray(),
-                MimeType = mimeType
+                MimeType = mimeType,
+                Name = $"{request.Width}x{request.Height}.{ext}"
             };
         }
     }

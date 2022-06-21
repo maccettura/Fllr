@@ -25,24 +25,11 @@ namespace Fllr.Generator.Default
 
             Color fontColor = request.TextColor.HexStringToColor();
 
-            var family = PlaceholdFontCollection.Instance.Families.FirstOrDefault(x => string.Equals(x.Name, request.Font, StringComparison.CurrentCultureIgnoreCase));
-
-            if (family == null)
-            {
-                family = PlaceholdFontCollection.Instance.Families.FirstOrDefault();
-            }
-
-            DrawingOptions drawingOptions = new()
-            {
-                TextOptions = new()
-                {
-                    WrapTextWidth = textMaxWidth,
-                }
-            };
+            FontFamily family = PlaceholdFontCollection.Instance.Families.FirstOrDefault(x => string.Equals(x.Name, request.Font, StringComparison.CurrentCultureIgnoreCase));
 
             var font = new Font(family, request.FontSize);
 
-            var size = TextMeasurer.Measure(request.Text, new RendererOptions(font, 72));
+            var size = TextMeasurer.Measure(request.Text, new TextOptions(font));
 
             int xPos = (int)((request.Width - size.Width) / 2);
             if(xPos < 0)
@@ -51,7 +38,7 @@ namespace Fllr.Generator.Default
             }
             int yPos = (int)((request.Height - size.Height) / 2);
 
-            image.Mutate(i => i.DrawText(drawingOptions, request.Text, font, fontColor, new PointF(xPos, yPos)));
+            image.Mutate(i => i.DrawText(request.Text, font, fontColor, new PointF(xPos, yPos)));
 
             return SaveImage(image, request);
         }
