@@ -127,14 +127,14 @@ export default {
             if(emoji){
                 return emoji;
             }
-            const baseUrl = `https://i.fllr.art/${this.width}x${this.height}`;
+            const baseUrl = `https://i.fllr.art`;
 
             var url;
             if(this.textColor && this.backgroundColor){
-                url = `${baseUrl}/${this.backgroundColor}/${this.textColor}`;
+                url = `${baseUrl}/${this.backgroundColor}/${this.textColor}/${this.width}x${this.height}`;
             }
             else {
-                url = baseUrl;
+                url = `${baseUrl}/${this.width}x${this.height}`;
             }
 
             var hasText = false;
