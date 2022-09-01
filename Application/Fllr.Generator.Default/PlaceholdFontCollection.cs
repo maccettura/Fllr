@@ -29,7 +29,7 @@ namespace Fllr.Generator.Default
             foreach (var filename in fontFiles)
             {
                 using var stream = assembly.GetManifestResourceStream(filename);
-                collection.Install(stream);
+                collection.Add(stream);
             }
 
             return collection;

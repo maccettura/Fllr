@@ -18,11 +18,11 @@
             Font = font ?? DefaultFont;
             TextColor = textColor ?? DefaultTextColor;
             Color = bgColor ?? DefaultBgColor;
-            FontSize = Height / 10;
+            FontSize = Height / 12;
 
             if (string.IsNullOrWhiteSpace(text))
             {
-                text = $"{width}x{height}";
+                text = $"{width} x {height}";
             }
 
             Text = text;

@@ -11,6 +11,8 @@ namespace Fllr.Generator.Default
 {
     public class DefaultImageService : BaseImageService, IImageService<DefaultImageRequest>
     {
+        readonly float _padding = 10f;
+
         public PlaceholdImage GenerateImage(DefaultImageRequest request)
         {
             using var image = request.ToImage();
@@ -19,32 +21,24 @@ namespace Fllr.Generator.Default
                 return SaveImage(image, request);
             }
 
-            float padding = 10f;
-            float textMaxWidth = request.Width - padding * 2; // width of image indent left & right by padding
+            float textMaxWidth = request.Width - _padding * 2; // width of image indent left & right by padding
 
             Color fontColor = request.TextColor.HexStringToColor();
 
-            var family = PlaceholdFontCollection.Instance.Families.FirstOrDefault(x => string.Equals(x.Name, request.Font, StringComparison.CurrentCultureIgnoreCase));
-
-            if (family == null)
-            {
-                family = PlaceholdFontCollection.Instance.Families.FirstOrDefault();
-            }
-
-            var drawingOptions = new DrawingOptions()
-            {
-                TextOptions = new TextOptions()
-                {
-                    WrapTextWidth = textMaxWidth,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    ApplyKerning = true
-                }
-            };
+            FontFamily family = PlaceholdFontCollection.Instance.Families.FirstOrDefault(x => string.Equals(x.Name, request.Font, StringComparison.CurrentCultureIgnoreCase));
 
             var font = new Font(family, request.FontSize);
 
-            image.Mutate(i => i.DrawText(drawingOptions, request.Text, font, fontColor, new PointF(0, request.Height / 2)));
+            var size = TextMeasurer.Measure(request.Text, new TextOptions(font));
+
+            int xPos = (int)((request.Width - size.Width) / 2);
+            if(xPos < 0)
+            {
+                xPos = (int)_padding;
+            }
+            int yPos = (int)((request.Height - size.Height) / 2);
+
+            image.Mutate(i => i.DrawText(request.Text, font, fontColor, new PointF(xPos, yPos)));
 
             return SaveImage(image, request);
         }
