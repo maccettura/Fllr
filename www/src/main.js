@@ -1,13 +1,10 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 import App from './App.vue'
-import Vuelidate from 'vuelidate'
-import Toasted from 'vue-toasted'
 
-Vue.use(Vuelidate)
-Vue.use(Toasted)
+const app = createApp(App)
 
-Vue.config.productionTip = false
+app.use(Toast)
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+app.mount('#app')
