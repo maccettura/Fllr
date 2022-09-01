@@ -80,7 +80,7 @@
             </div>
             <div class="col-md-5">
                 <img v-if="!v$.$errors.length" v-bind:src="imageUrl" class="img-fluid" alt="Placeholder Image" />
-                <img v-else class="img-fluid" src="invalid.jpg" alt="Bad image" />
+                <img v-else class="img-fluid" src="/img/invalid.jpg" alt="Bad image" />
             </div>
         </div>  
     </div>  

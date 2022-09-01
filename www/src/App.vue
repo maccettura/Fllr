@@ -9,7 +9,7 @@ import LinkGenerator from './components/LinkGenerator.vue'
           <a class="navbar-brand" href="#">fllr.art</a>
             <ul class="navbar-nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="https://github.com/maccettura/Fllr"> <img src="github.png" srcset="github-high.png 2x"> </a>
+                    <a class="nav-link" target="_blank" href="https://github.com/maccettura/Fllr"> <img src="/img/GitHub-Mark-Light-32px.png"> </a>
                 </li>
             </ul>
       </div>
