@@ -1,5 +1,6 @@
 # fllr.art
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/07ac06fd-9e5c-454c-8c7a-2598072c7aeb/deploy-status)](https://app.netlify.com/sites/fllr/deploys)
 
 ### Overview
 
