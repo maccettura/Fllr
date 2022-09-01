@@ -141,10 +141,10 @@ export default {
 
             var url;
             if(this.textColor && this.backgroundColor){
-                url = `${baseUrl}/${this.backgroundColor}/${this.textColor}/${this.width}x${this.height}`;
+                url = `${baseUrl}/${this.backgroundColor}/${this.textColor}`;
             }
             else {
-                url = `${baseUrl}/${this.width}x${this.height}`;
+                url = baseUrl;
             }
 
             url = `${url}/${this.width}x${this.height}`;
